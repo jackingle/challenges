@@ -43,7 +43,6 @@ func checkPorts() TotalResult {
 				PortNumber: ports[j],
 			}
 			result.Websites[i].Ports = append(result.Websites[i].Ports, port)
-			// result.Websites[i].Ports[j].PortNumber = ports[j]
 			if err := checkPort(sites[i], ports[j]); err != nil {
 				result.Websites[i].Ports[j].Response = "Failed to connect!"
 			} else {
