@@ -3,5 +3,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("This exists to allow multiple modules but gopls disagrees!")
+	fmt.Println("Gopls complains about multiple workspaces but I can handle it.")
 }
