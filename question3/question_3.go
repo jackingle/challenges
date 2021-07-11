@@ -37,6 +37,14 @@ type Results []struct {
 	Rated     string    `json:"rated"`
 }
 
+const (
+	narutoURL             = "https://api.jikan.moe/v3/search/anime?q=naruto"
+	sortedListByRated     = "sortedListByRated"
+	sortedListByScore     = "sortedListByScore"
+	sortedByScoreAndRated = "sortedListByScoreAndRated"
+	original              = "original"
+)
+
 var record = []string{"MalID", "URL", "ImageURL", "Title", "Airing", "Synopsis", "Type", "Episodes", "Score", "StartDate", "EndDate", "Members", "Rated"}
 
 // ByScore implements sort.Interface based on the Score field.
@@ -57,14 +65,6 @@ func (a ByRated) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 
 // Write a program that sorts all of the results from this GET query https://api.jikan.moe/v3/search/anime?q=naruto by score, then rated.
 // Output the data in CSV and also display this in an ASCII table on the console.
-
-const (
-	narutoURL             = "https://api.jikan.moe/v3/search/anime?q=naruto"
-	sortedListByRated     = "sortedListByRated"
-	sortedListByScore     = "sortedListByScore"
-	sortedByScoreAndRated = "sortedListByScoreAndRated"
-	original              = "original"
-)
 
 func main() {
 	if err := getScore(); err != nil {
