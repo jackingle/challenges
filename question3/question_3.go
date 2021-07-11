@@ -81,7 +81,12 @@ func getScore() error {
 	}
 	list := NarutoList{}
 	body, err := ioutil.ReadAll(resp.Body)
-	err = json.Unmarshal(body, &list)
+	if err != nil {
+		return err
+	}
+	if err := json.Unmarshal(body, &list); err != nil {
+		return err
+	}
 	if err := outputAll(list); err != nil {
 		return err
 	}
@@ -136,12 +141,17 @@ func outputAll(list NarutoList) error {
 func outputCSV(list NarutoList, filename string) error {
 	newFile := fmt.Sprintf("%v.csv", filename)
 	file, err := os.Create(newFile)
+	if err != nil {
+		return err
+	}
 
 	defer file.Close()
 
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
-	writer.Write(record)
+	if err := writer.Write(record); err != nil {
+		return err
+	}
 
 	for _, value := range list.Results {
 
